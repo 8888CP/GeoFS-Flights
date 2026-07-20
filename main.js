@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS Flights
 // @namespace    http://tampermonkey.net/
-// @version      3.6
+// @version      1.0
 // @description  Fixed bottom bar, popup entry, draggable banner, Logo loaded from remote JSON.
 // @match        *://*.geo-fs.com/*
 // @match        *://*.geofs.net/*
