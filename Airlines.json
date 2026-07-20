@@ -1,0 +1,106 @@
+[
+    {
+        "airline": "Sichuan Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/0/0d/Sichuan_Airlines_logo.svg/250px-Sichuan_Airlines_logo.svg.png"
+    },
+    {
+        "airline": "Air China",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/d/d1/Air_China.svg/250px-Air_China.svg.png"
+    },
+    {
+        "airline": "China Southern Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/b/b4/China_Southern_Airlines_logo.svg/250px-China_Southern_Airlines_logo.svg.png"
+    },
+    {
+        "airline": "China Eastern Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/a/a4/China_Eastern_logo_%282014%29.svg/250px-China_Eastern_logo_%282014%29.svg.png"
+    },
+    {
+        "airline": "Hainan Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/4/4a/Hainan_Airlines_logo.svg/250px-Hainan_Airlines_logo.svg.png"
+    },
+    {
+        "airline": "Delta Air Lines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Delta_logo.svg/250px-Delta_logo.svg.png"
+    },
+    {
+        "airline": "American Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/9/90/American_Airline_logo_2013.svg/250px-American_Airline_logo_2013.svg.png"
+    },
+    {
+        "airline": "United Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/6/61/United_Airlines_2010_logo.svg/250px-United_Airlines_2010_logo.svg.png"
+    },
+    {
+        "airline": "Emirates",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/250px-Emirates_logo.svg.png"
+    },
+    {
+        "airline": "Qatar Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/9/9b/Qatar_Airways_Logo.svg/250px-Qatar_Airways_Logo.svg.png"
+    },
+    {
+        "airline": "Singapore Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/f/fa/Singapore_Airlines.svg/250px-Singapore_Airlines.svg.png"
+    },
+    {
+        "airline": "Xiamen Air",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/d/df/XIAMEN_AIR_logo.svg/250px-XIAMEN_AIR_logo.svg.png"
+    },
+    {
+        "airline": "Fuzhou Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/6/63/FuZhouAirlinesLogo.png/250px-FuZhouAirlinesLogo.png"
+    },
+    {
+        "airline": "Cathay Pacific Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/3/33/Cathay_Pacific_logo_2014.svg/250px-Cathay_Pacific_logo_2014.svg.png"
+    },
+    {
+        "airline": "Hong Kong Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/d/d6/Hong_Kong_Airlines_Logo.svg/250px-Hong_Kong_Airlines_Logo.svg.png"
+    },
+    {
+        "airline": "Air Macau",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/1/1d/AirMacau.svg/250px-AirMacau.svg.png"
+    },
+    {
+        "airline": "Korean Air Lines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Korean_Air_2025.svg/250px-Korean_Air_2025.svg.png"
+    },
+    {
+        "airline": "Asiana Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Asiana_Airlines_%282024%29.svg/250px-Asiana_Airlines_%282024%29.svg.png"
+    },
+    {
+        "airline": "Jin Air",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/1/1a/Jinair_logo.gif/250px-Jinair_logo.gif"
+    },
+    {
+        "airline": "JEJU Air",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Jeju_Air_Logo.svg/250px-Jeju_Air_Logo.svg.png"
+    },
+    {
+        "airline": "Japan Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/e/e4/Japan_Airlines_Logo.svg/250px-Japan_Airlines_Logo.svg.png"
+    },
+    {
+        "airline": "All Nippon Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/All_Nippon_Airways_Logo.svg/250px-All_Nippon_Airways_Logo.svg.png"
+    },
+    {
+        "airline": "Shenzhen Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/8/84/Shenzhen_Airlines_logo.svg/250px-Shenzhen_Airlines_logo.svg.png"
+    },
+    {
+        "airline": "Etihad Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Etihad-airways-logo.svg/330px-Etihad-airways-logo.svg.png"
+    },
+    {
+        "airline": "Aeroflot",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Aeroflot_Russian_Airlines_logo_%28ru%29.svg/250px-Aeroflot_Russian_Airlines_logo_%28ru%29.svg.png"
+    },
+    {
+        "airline": "S7 Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/S7_new_logo.svg/250px-S7_new_logo.svg.png"
+    },
+]
