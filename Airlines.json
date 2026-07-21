@@ -231,4 +231,152 @@
         "airline": "Tigerair",
         "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Tigerair.svg/250px-Tigerair.svg.png"
     },
+    {
+        "airline": "Tianjin Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/9/96/Tianjin_Airlines.png/250px-Tianjin_Airlines.png"
+    },
+    {
+        "airline": "West Air",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/a/af/Logo_westair_2015.gif"
+    },
+    {
+        "airline": "Southwest Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Southwest_Airlines_logo_2014.svg/250px-Southwest_Airlines_logo_2014.svg.png"
+    },
+    {
+        "airline": "JetBlue Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/JetBlue_Airways_Logo.svg/250px-JetBlue_Airways_Logo.svg.png"
+    },
+    {
+        "airline": "Hawaiian Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/d/df/Hawaiian_Airlines_logo.svg/250px-Hawaiian_Airlines_logo.svg.png"
+    },
+    {
+        "airline": "Spirit Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Spirit_Airlines_logo.svg/250px-Spirit_Airlines_logo.svg.png"
+    },
+    {
+        "airline": "Atlas Air",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Logo_wordmark_Atlas_Air_%282019%29.png/250px-Logo_wordmark_Atlas_Air_%282019%29.png"
+    },
+    {
+        "airline": "UPS",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/United_Parcel_Service_logo_2014.svg/120px-United_Parcel_Service_logo_2014.svg.png"
+    },
+    {
+        "airline": "FedEx Express",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/FedEx_Express.svg/250px-FedEx_Express.svg.png"
+    },
+    {
+        "airline": "Kalitta Air",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/6/63/Kalitta_Air_Logo.jpg/250px-Kalitta_Air_Logo.jpg"
+    },
+    {
+        "airline": "Qatar Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/9/9b/Qatar_Airways_Logo.svg/250px-Qatar_Airways_Logo.svg.png"
+    },
+    {
+        "airline": "TUI",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/TUI_Logo_neu.png/250px-TUI_Logo_neu.png"
+    },
+    {
+        "airline": "Eurowings",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Eurowings_Logo.svg/250px-Eurowings_Logo.svg.png"
+    },
+    {
+        "airline": "Thai Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Thai_Airways_logo.svg/250px-Thai_Airways_logo.svg.png"
+    },
+    {
+        "airline": "Bangkok Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Bangkok_Airways_Logo.svg/250px-Bangkok_Airways_Logo.svg.png"
+    },
+    {
+        "airline": "Thai AirAsia",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/2/28/Logo_Thai_AirAsia.gif"
+    },
+    {
+        "airline": "Thai AirAsia X",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/AirAsia_X_Logo.svg/250px-AirAsia_X_Logo.svg.png"
+    },
+    {
+        "airline": "Virgin Australia",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/e/e2/Virgin_Australia_logo.svg/250px-Virgin_Australia_logo.svg.png"
+    },
+    {
+        "airline": "Jetstar Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Jetstar_logo.svg/250px-Jetstar_logo.svg.png"
+    },
+    {
+        "airline": "Jetstar Japan",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Jetstar_logo.svg/250px-Jetstar_logo.svg.png"
+    },
+    {
+        "airline": "Jetstar Hong Kong",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Jetstar_logo.svg/250px-Jetstar_logo.svg.png"
+    },
+    {
+        "airline": "Jetstar Asia",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Jetstar_logo.svg/250px-Jetstar_logo.svg.png"
+    },
+    {
+        "airline": "Air Canada",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Air_Canada_2017.svg/250px-Air_Canada_2017.svg.png"
+    },
+    {
+        "airline": "WestJet",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/WestJetLogo2018.svg/250px-WestJetLogo2018.svg.png"
+    },
+    {
+        "airline": "Flair Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Flair_Airlines_logo_%282019%29.svg/250px-Flair_Airlines_logo_%282019%29.svg.png"
+    },
+    {
+        "airline": "Porter Airlines",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Porter_Airlines_Logo.svg/250px-Porter_Airlines_Logo.svg.png"
+    },
+    {
+        "airline": "Air Transat",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Air_Transat_logo.svg/250px-Air_Transat_logo.svg.png"
+    },
+    {
+        "airline": "Airbus",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Airbus_Logo_2017.svg/250px-Airbus_Logo_2017.svg.png"
+    },
+    {
+        "airline": "Boeing",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Boeing_full_logo.svg/250px-Boeing_full_logo.svg.png"
+    },
+    {
+        "airline": "Comac",
+        "logo": "https://upload.wikimedia.org/wikipedia/zh/thumb/3/30/Commercial_Aircraft_Corporation_of_China_%28COMAC%29_logo.svg/120px-Commercial_Aircraft_Corporation_of_China_%28COMAC%29_logo.svg.png"
+    },
+    {
+        "airline": "ATR",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/ATR_logo_2015.svg/250px-ATR_logo_2015.svg.png"
+    },
+    {
+        "airline": "Antonov State Company",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Antonov_logo.png/120px-Antonov_logo.png"
+    },
+    {
+        "airline": "Bombardier Aviation",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Bombardier.svg/250px-Bombardier.svg.png"
+    },
+    {
+        "airline": "Embraer",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Embraer_logo.svg/250px-Embraer_logo.svg.png"
+    },
+    {
+        "airline": "Lockheed Corporation",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Lockheed-logo_Winnie-Mae.png/250px-Lockheed-logo_Winnie-Mae.png"
+    },
+    {
+        "airline": "Tupolev",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/UAC_Tupolev_logo.svg/250px-UAC_Tupolev_logo.svg.png"
+    },
+    {
+        "airline": "Bamboo Airways",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Bamboo_Airways_Logo.svg/250px-Bamboo_Airways_Logo.svg.png"
+    }
 ]
