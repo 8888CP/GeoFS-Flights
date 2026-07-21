@@ -6,6 +6,7 @@
 
 # Issue feedback
 1.If you encounter any issues while using this Addon, please report them in the [Issues](https://github.com/8888CP/GeoFS-Flights/issues) section
+
 2.If you have any better ideas about this Addon, feel free to share your feedback in the [Issues](https://github.com/8888CP/GeoFS-Flights/issues) section
 
 # Add airlines
