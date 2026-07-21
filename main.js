@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         GeoFS Flights
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Fixed bottom bar, popup entry, draggable banner, Logo loaded from remote JSON.
-// @match        *://*.geo-fs.com/*
-// @match        *://*.geofs.net/*
+// @match        https://geo-fs.com/geofs.php*
+// @match        https://*.geo-fs.com/geofs.php*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=geo-fs.com
 // @grant        none
 // ==/UserScript==
 
@@ -96,12 +97,14 @@
             position: fixed;
             left: 20px;
             bottom: 70px;
+            resize: both;
+            overflow: auto;
             width: auto;
             height: auto;
-            min-width: 300px;
-            min-height: 120px;
-            max-width: 80vw;
-            max-height: 80vh;
+            min-width: 400px;
+            min-height: 100px;
+            max-width: 90vw;
+            max-height: 90vh;
             z-index: 9998;
             background: transparent;
             padding: 0;
@@ -110,36 +113,25 @@
             transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         #fp-banner:active { cursor: grabbing; }
-        
-        #fp-banner::-webkit-scrollbar { width: 0; height: 0; }
+        #fp-banner::-webkit-scrollbar { width: 8px; height: 8px; }
+        #fp-banner::-webkit-scrollbar-track { background: transparent; }
+        #fp-banner::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+        #fp-banner::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+        #fp-banner::-webkit-scrollbar-corner { background: transparent; }
         
         .fp-banner-inner {
             display: flex;
+            flex-wrap: nowrap;
             align-items: center;
-            background: rgba(245, 245, 245, 0.95);
-            padding: 10px 18px;
+            background: #ffffff;
+            padding: 8px 18px;
             border-radius: 6px;
             width: 100%;
             height: 100%;
             box-sizing: border-box;
             pointer-events: none;
         }
-        #fp-end-flight-btn, #fp-resize-handle { pointer-events: auto; }
-
-        #fp-resize-handle {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 16px;
-            height: 16px;
-            cursor: se-resize;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.08);
-            border-top: 1px solid rgba(0,0,0,0.1);
-            border-left: 1px solid rgba(0,0,0,0.1);
-            border-radius: 0 0 6px 0;
-        }
-        #fp-resize-handle:hover { background: rgba(0, 0, 0, 0.15); }
+        #fp-end-flight-btn { pointer-events: auto; }
 
         .fp-history-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; margin-bottom: 6px; background: #333; border-radius: 4px; cursor: pointer; transition: 0.2s; }
         .fp-history-item:hover { background: #444; }
@@ -167,18 +159,13 @@
             const modalHTML = `
             <div id="fp-modal" style="display:none; position:fixed; top:50%; right:20px; transform:translateY(-50%); width:340px; background:#222; padding:20px; border-radius:8px; border:1px solid #444; z-index:9999; color:#fff; box-shadow:0 4px 20px rgba(0,0,0,0.9); font-family: 'Segoe UI', Roboto, sans-serif;">
                 <h3 style="margin-top:0; text-align:center; color:#fff; font-weight:400; letter-spacing:1px;">Flight</h3>
-                
                 <input id="fp-airline" autocomplete="off" placeholder="Airline (e.g., Sichuan Airlines)" style="width:100%; margin-bottom:10px; padding:10px; background:#333; border:1px solid #555; color:#fff; border-radius:4px; box-sizing:border-box;">
                 <input id="fp-aircraft" autocomplete="off" placeholder="Aircraft (e.g., A320-214)" style="width:100%; margin-bottom:10px; padding:10px; background:#333; border:1px solid #555; color:#fff; border-radius:4px; box-sizing:border-box;">
-                
                 <input id="fp-departure" autocomplete="off" placeholder="Departure (e.g., Beijing Daxing)" style="width:100%; margin-bottom:10px; padding:10px; background:#333; border:1px solid #555; color:#fff; border-radius:4px; box-sizing:border-box;">
                 <input id="fp-arrival" autocomplete="off" placeholder="Arrival (e.g., Chengdu Shuangliu)" style="width:100%; margin-bottom:10px; padding:10px; background:#333; border:1px solid #555; color:#fff; border-radius:4px; box-sizing:border-box;">
-
                 <input id="fp-flightno" autocomplete="off" placeholder="Flight No. (e.g., 3U6687)" style="width:100%; margin-bottom:15px; padding:10px; background:#333; border:1px solid #555; color:#fff; border-radius:4px; box-sizing:border-box;">
-                
                 <div style="display:flex; flex-direction:column; gap:15px;">
                     <button id="fp-confirm" style="width:100%; padding:12px; background:#1976d2; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:16px; font-weight:bold;">Start Flight</button>
-                    
                     <div style="border-top:1px solid #444; padding-top:12px;">
                         <div style="font-size:14px; color:#aaa; margin-bottom:8px;">Flight History</div>
                         <div id="fp-history-list"></div>
@@ -193,28 +180,23 @@
             const bannerHTML = `
             <div id="fp-banner">
                 <div class="fp-banner-inner">
-                    <div style="flex-shrink:0; display:flex; align-items:center; justify-content:center; width:150px; height:150px; margin-right:16px; background:transparent; border-radius:4px; overflow:hidden;">
+                    <div style="flex-shrink:0; display:flex; align-items:center; justify-content:center; width:150px; height:150px; margin-right:0px; background:transparent; border-radius:4px; overflow:hidden;">
                         <img id="fp-logo" src="" style="width:100%; height:100%; object-fit:contain; display:block;">
                     </div>
                     <div style="flex-shrink:0; width:3px; height:60px; background:#c62828; margin-right:16px;"></div>
-                    
-                    <div style="display:flex; flex-direction:column; justify-content:space-between; height:56px; margin-right:15px;">
-                        <div id="fp-flightno-display" style="font-size:24px; font-weight:600; color:#222; line-height:1;">3U6687</div>
-                        <div id="fp-route-en" style="font-size:14px; color:#444; line-height:1.2; margin-top:6px;">Beijing Daxing - Chengdu Shuangliu</div>
+                    <div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; justify-content:space-between; height:56px; margin-right:15px;">
+                        <div id="fp-flightno-display" style="font-size:24px; font-weight:600; color:#222; line-height:1; white-space:nowrap;">3U6687</div>
+                        <div id="fp-route-en" style="font-size:14px; color:#444; line-height:1.2; margin-top:6px; white-space:nowrap;">Beijing Daxing - Chengdu Shuangliu</div>
                     </div>
-
-                    <div style="display:flex; align-items:center; justify-content:center; height:56px; margin-right:15px; border-left:1px solid #bbb; padding-left:15px;">
-                        <div id="fp-aircraft-display" style="font-size:16px; color:#333; line-height:1.2;">Airbus A380</div>
+                    <div style="flex:1 1 auto; min-width:0; display:flex; align-items:center; justify-content:center; height:56px; margin-right:15px; border-left:1px solid #bbb; padding-left:15px;">
+                        <div id="fp-aircraft-display" style="font-size:16px; color:#333; line-height:1.2; white-space:nowrap;">Airbus A380</div>
                     </div>
-
-                    <div style="display:flex; flex-direction:column; align-items:flex-start; justify-content:center; height:56px; margin-right:15px; border-left:1px solid #bbb; padding-left:15px; min-width: 130px;">
+                    <div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; height:56px; margin-right:15px; border-left:1px solid #bbb; padding-left:15px;">
                         <div style="font-size:11px; color:#666; font-weight:500; margin-bottom:2px;">TIME</div>
                         <div id="fp-time-display" style="font-weight:600; font-size:16px; color:#333; white-space: nowrap;">0 minutes</div>
                     </div>
-
-                    <button id="fp-end-flight-btn" style="padding:8px 15px; background:#d32f2f; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:14px; pointer-events:auto;">End Flight</button>
+                    <button id="fp-end-flight-btn" style="flex-shrink:0; padding:8px 15px; background:#d32f2f; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:14px; pointer-events:auto;">End Flight</button>
                 </div>
-                <div id="fp-resize-handle"></div>
             </div>
             `;
             document.body.insertAdjacentHTML('beforeend', bannerHTML);
@@ -241,7 +223,6 @@
             data.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = 'fp-history-item';
-                
                 const span = document.createElement('span');
                 span.textContent = item.flightno || 'Unknown Flight';
                 span.onclick = function(e) { 
@@ -252,7 +233,6 @@
                     }
                     showBanner(item); 
                 };
-                
                 const del = document.createElement('span');
                 del.className = 'fp-del';
                 del.textContent = '×';
@@ -268,7 +248,6 @@
                         }
                     }
                 };
-                
                 div.appendChild(span);
                 div.appendChild(del);
                 list.appendChild(div);
@@ -278,14 +257,12 @@
         function showBanner(item) {
             const banner = document.getElementById('fp-banner');
             if (!banner) return;
-
             if (hideTimeoutId) {
                 clearTimeout(hideTimeoutId);
                 hideTimeoutId = null;
             }
 
             isBannerActive = true;
-
             banner.style.left = '20px';
             banner.style.bottom = '70px';
             banner.style.top = 'auto';
@@ -328,7 +305,6 @@
             banner.style.opacity = '0';
             banner.style.transform = 'translateY(25px)';
             banner.style.pointerEvents = 'none';
-            
             void banner.offsetHeight;
 
             requestAnimationFrame(() => {
@@ -344,12 +320,10 @@
                 clearTimeout(hideTimeoutId);
                 hideTimeoutId = null;
             }
-
             const banner = document.getElementById('fp-banner');
             if (!banner) return;
-            
             isBannerActive = false;
-            
+            banner.style.transition = 'opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             banner.style.opacity = '0';
             banner.style.transform = 'translateY(25px)';
             hideTimeoutId = setTimeout(() => {
@@ -367,22 +341,18 @@
 
         function initDragListeners() {
             if (!bannerEl) return;
-            
             bannerEl.addEventListener('mousedown', function(e) {
-                if (e.target.id === 'fp-end-flight-btn' || e.target.id === 'fp-resize-handle') return; 
+                if (e.target.id === 'fp-end-flight-btn') return; 
                 isDragging = true;
                 const rect = bannerEl.getBoundingClientRect();
                 dragStartX = e.clientX;
                 dragStartY = e.clientY;
-                
                 const style = window.getComputedStyle(bannerEl);
                 dragStartLeft = parseInt(style.left) || 20;
                 dragStartTop = parseInt(style.top) || (window.innerHeight - rect.height - 70);
-                
                 if (parseInt(style.bottom) > 0 && isNaN(parseFloat(bannerEl.style.top))) {
                     dragStartTop = window.innerHeight - rect.height - parseInt(style.bottom);
                 }
-
                 bannerEl.style.transition = 'none';
                 bannerEl.style.cursor = 'grabbing';
                 e.preventDefault();
@@ -392,7 +362,6 @@
                 if (!isDragging) return;
                 const dx = e.clientX - dragStartX;
                 const dy = e.clientY - dragStartY;
-                
                 bannerEl.style.left = (dragStartLeft + dx) + 'px';
                 bannerEl.style.top = (dragStartTop + dy) + 'px';
                 bannerEl.style.bottom = 'auto';
@@ -408,53 +377,17 @@
         }
         initDragListeners();
 
-        let isResizing = false;
-        let resizeStartX, resizeStartY, resizeStartWidth, resizeStartHeight;
-        const resizeHandle = document.getElementById('fp-resize-handle');
-
-        if (resizeHandle) {
-            resizeHandle.addEventListener('mousedown', function(e) {
-                e.stopPropagation();
-                isResizing = true;
-                const rect = bannerEl.getBoundingClientRect();
-                resizeStartX = e.clientX;
-                resizeStartY = e.clientY;
-                resizeStartWidth = rect.width;
-                resizeStartHeight = rect.height;
-                bannerEl.style.transition = 'none';
-                e.preventDefault();
-            });
-        }
-
-        document.addEventListener('mousemove', function(e) {
-            if (!isResizing) return;
-            const dx = e.clientX - resizeStartX;
-            const dy = e.clientY - resizeStartY;
-            bannerEl.style.width = Math.max(300, resizeStartWidth + dx) + 'px';
-            bannerEl.style.height = Math.max(120, resizeStartHeight + dy) + 'px';
-        });
-
-        document.addEventListener('mouseup', function(e) {
-            if (isResizing) {
-                isResizing = false;
-                bannerEl.style.transition = 'opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            }
-        });
-
         fpBtn.onclick = function(e) {
             e.stopPropagation();
             const modal = document.getElementById('fp-modal');
-
             if (modal && modal.style.display === 'block') {
                 modal.style.display = 'none';
                 return;
             }
-
             if (isBannerActive) {
                 hideBanner();
                 return;
             }
-
             modal.style.display = 'block';
             renderHistory();
         };
@@ -472,7 +405,6 @@
             }
 
             const flightData = { airline, aircraft, departure, arrival, route: departure + ' - ' + arrival, flightno };
-            
             let history = getHistory();
             const existIdx = history.findIndex(item => item.flightno === flightno);
             if (existIdx !== -1) history[existIdx] = flightData;
@@ -487,7 +419,6 @@
 
         document.getElementById('fp-end-flight-btn').onclick = function() {
             const currentFlightNo = document.getElementById('fp-flightno-display').textContent;
-
             if (flightStartTime && currentFlightNo && currentFlightNo !== '------') {
                 let history = getHistory();
                 const idx = history.findIndex(item => item.flightno === currentFlightNo);
@@ -498,10 +429,8 @@
                     renderHistory(); 
                 }
             }
-
             stopFlightTimer();
             hideBanner();
-            
             document.getElementById('fp-airline').value = '';
             document.getElementById('fp-aircraft').value = '';
             document.getElementById('fp-departure').value = '';
