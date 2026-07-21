@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS Flights
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Fixed bottom bar, popup entry, draggable banner, Logo loaded from remote JSON.
 // @match        https://geo-fs.com/geofs.php*
 // @match        https://*.geo-fs.com/geofs.php*
@@ -16,7 +16,7 @@
     const FALLBACK_LOGO = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Ctext x='75' y='82' font-family='Arial' font-size='28' text-anchor='middle' fill='%23666'%3ELOGO%3C/text%3E%3C/svg%3E";
 
     let logoData = [];
-    let isBannerActive = false; 
+    let isBannerActive = false;
     let hideTimeoutId = null;
 
     async function loadLogoJSON() {
@@ -91,7 +91,7 @@
         #fp-modal { transition: opacity 0.3s ease; z-index: 9999; }
         #fp-modal input:focus { outline: none; border-color: #1976d2 !important; }
         #fp-btn { font-weight: 400; letter-spacing: 0.5px; }
-        
+
         #fp-banner {
             display: none;
             position: fixed;
@@ -118,7 +118,7 @@
         #fp-banner::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
         #fp-banner::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
         #fp-banner::-webkit-scrollbar-corner { background: transparent; }
-        
+
         .fp-banner-inner {
             display: flex;
             flex-wrap: nowrap;
@@ -225,13 +225,13 @@
                 div.className = 'fp-history-item';
                 const span = document.createElement('span');
                 span.textContent = item.flightno || 'Unknown Flight';
-                span.onclick = function(e) { 
-                    e.stopPropagation(); 
+                span.onclick = function(e) {
+                    e.stopPropagation();
                     if (hideTimeoutId) {
                         clearTimeout(hideTimeoutId);
                         hideTimeoutId = null;
                     }
-                    showBanner(item); 
+                    showBanner(item);
                 };
                 const del = document.createElement('span');
                 del.className = 'fp-del';
@@ -254,6 +254,38 @@
             });
         }
 
+        // ========== 全新、更精准的 Logo 匹配函数 ==========
+        function findBestMatch(airlineName, logoData) {
+            let normalizedInput = airlineName.toLowerCase().trim();
+            let inputWords = normalizedInput.split(/\s+/).filter(w => w.length > 0);
+
+            // 1. 完全相等
+            let matched = logoData.find(entry => entry.airline.toLowerCase().trim() === normalizedInput);
+            if (matched) return matched;
+
+            // 2. 单词完全匹配（按空格分词，任意单词相等）
+            if (inputWords.length > 0) {
+                matched = logoData.find(entry => {
+                    let entryWords = entry.airline.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+                    return inputWords.some(inputWord => entryWords.some(entryWord => inputWord === entryWord));
+                });
+                if (matched) return matched;
+            }
+
+            // 3. 前缀匹配（整个字符串）
+            matched = logoData.find(entry => {
+                let entryName = entry.airline.toLowerCase().trim();
+                return entryName.startsWith(normalizedInput) || normalizedInput.startsWith(entryName);
+            });
+            if (matched) return matched;
+
+            // 4. 回退：包含匹配（最低优先级）
+            return logoData.find(entry => {
+                let entryName = entry.airline.toLowerCase();
+                return entryName.includes(normalizedInput) || normalizedInput.includes(entryName);
+            });
+        }
+
         function showBanner(item) {
             const banner = document.getElementById('fp-banner');
             if (!banner) return;
@@ -266,16 +298,13 @@
             banner.style.left = '20px';
             banner.style.bottom = '70px';
             banner.style.top = 'auto';
-            banner.style.width = 'auto'; 
-            banner.style.height = 'auto'; 
+            banner.style.width = 'auto';
+            banner.style.height = 'auto';
 
-            let logoUrl = FALLBACK_LOGO; 
+            let logoUrl = FALLBACK_LOGO;
             if (logoData && logoData.length > 0) {
-                const airlineName = (item.airline || '').toLowerCase();
-                const matched = logoData.find(entry => 
-                    airlineName.includes(entry.airline.toLowerCase()) || 
-                    entry.airline.toLowerCase().includes(airlineName)
-                );
+                const airlineName = (item.airline || '').trim();
+                const matched = findBestMatch(airlineName, logoData);
                 if (matched) logoUrl = matched.logo;
             }
 
@@ -283,7 +312,7 @@
             document.getElementById('fp-logo').onerror = function() { this.src = FALLBACK_LOGO; };
 
             document.getElementById('fp-flightno-display').textContent = item.flightno || '------';
-            
+
             let dep = item.departure || '', arr = item.arrival || '';
             if (!dep && !arr && item.route) {
                 const parts = item.route.split(' - ');
@@ -314,6 +343,7 @@
                 banner.style.pointerEvents = 'auto';
             });
         }
+        // ==================================================
 
         function hideBanner() {
             if (hideTimeoutId) {
@@ -342,7 +372,7 @@
         function initDragListeners() {
             if (!bannerEl) return;
             bannerEl.addEventListener('mousedown', function(e) {
-                if (e.target.id === 'fp-end-flight-btn') return; 
+                if (e.target.id === 'fp-end-flight-btn') return;
                 isDragging = true;
                 const rect = bannerEl.getBoundingClientRect();
                 dragStartX = e.clientX;
@@ -426,7 +456,7 @@
                     const durationStr = formatFlightTime(Date.now() - flightStartTime);
                     history[idx].duration = durationStr;
                     saveHistory(history);
-                    renderHistory(); 
+                    renderHistory();
                 }
             }
             stopFlightTimer();
